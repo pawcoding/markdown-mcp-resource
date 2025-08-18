@@ -1,0 +1,54 @@
+name: 🚀 Publish new version
+# Run this on every push to master and next
+on:
+  push:
+    branches:
+      - master
+      - next
+
+env:
+  HUSKY: 0
+
+jobs:
+  publish:
+    # Use the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      # Checkout repository
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Setup Node
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "npm"
+
+      # Enable corepack
+      - name: ⚙️ Enable corepack
+        run: corepack enable && corepack enable npm
+
+      # Install dependencies
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # Check format
+      - name: 🧹 Check format
+        run: npm run format:check
+
+      # Create release
+      - name: 🚀 Create release
+        if: github.repository == 'pawcoding/markdown-mcp-resource'
+        id: release
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
