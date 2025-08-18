@@ -1,0 +1,29 @@
+{
+  "name": "markdown-mcp-resource",
+  "version": "0.0.1",
+  "description": "MCP server that makes remote markdown files available as mcp resources",
+  "keywords": [
+    "mcp-server",
+    "markdown"
+  ],
+  "homepage": "https://github.com/pawcoding/markdown-mcp-resource",
+  "bugs": {
+    "url": "https://github.com/pawcoding/markdown-mcp-resource/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawcoding/markdown-mcp-resource.git"
+  },
+  "license": "MIT",
+  "author": "Luis Wolf <development@pawcode.de> (https://pawcode.de)",
+  "type": "module",
+  "files": [],
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "packageManager": "npm@11.5.2",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
