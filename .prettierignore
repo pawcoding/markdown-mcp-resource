@@ -1,5 +1,6 @@
 # build output
 dist/
+CHANGELOG.md
 
 # dependencies
 node_modules/
@@ -16,3 +17,10 @@ npm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# misc
+LICENSE
+.husky/
+.prettierignore
+.gitignore
+.nvmrc
