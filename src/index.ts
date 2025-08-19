@@ -4,6 +4,7 @@ import {
 } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { argv } from "node:process";
+import z from "zod";
 import packageJson from "../package.json";
 import {
   readMarkdownFile,
@@ -68,9 +69,8 @@ server.registerResource(
     }
   }),
   {
-    title: "Markdown files",
-    description:
-      "Fetches markdown files and makes them available as resources.",
+    title: `Markdown files of ${hostname}`,
+    description: `Fetches markdown files from ${hostname} and makes them available as resources.`,
     mimeType: "text/markdown"
   },
   async (uri, { file }) => {
@@ -78,6 +78,48 @@ server.registerResource(
     const content = await readMarkdownFileAsResourceContent(uri, fileUrl);
     return {
       contents: content
+    };
+  }
+);
+
+server.registerTool(
+  "get_markdown_content",
+  {
+    title: `Get markdown content of ${hostname}`,
+    description: `Fetches the markdown content from ${hostname} and makes it available via this tool. Use the \`file\` parameter to specify the markdown file to fetch. If not specified, the index file will be fetched. Please use the markdown resources instead if possible.`,
+    annotations: {
+      readOnlyHint: true
+    },
+    inputSchema: {
+      file: z.optional(
+        z
+          .string()
+          .describe(
+            "The markdown file to fetch. If empty, fetches the index file."
+          )
+      )
+    }
+  },
+  async ({ file }) => {
+    const fileUrl = new URL(`${file || "index"}.md`, basePath);
+    const content = await readMarkdownFileAsResourceContent(fileUrl, fileUrl);
+    if (!content || content.length === 0) {
+      return {
+        isError: true,
+        content: [
+          {
+            type: "text",
+            text: `Failed to fetch markdown file: ${fileUrl.href}`
+          }
+        ]
+      };
+    }
+
+    return {
+      content: content.map((item) => ({
+        type: "text",
+        text: item.text as string
+      }))
     };
   }
 );

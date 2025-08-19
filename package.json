@@ -1,6 +1,6 @@
 {
   "name": "markdown-mcp-resource",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP server that makes remote markdown files available as mcp resources",
   "keywords": [
     "mcp-server",
@@ -32,7 +32,8 @@
     "start": "node dist/index.js $MARKDOWN_MCP_RESOURCE"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.3"
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
