@@ -20,11 +20,15 @@ The server:
 
 ### Using npx (Recommended)
 
+No installation is required when using npx, as it automatically downloads and runs the latest version:
+
 ```bash
 npx markdown-mcp-resource@latest https://your-documentation-site.com/path/
 ```
 
-### Global Installation
+### Global Installation (Optional)
+
+Only install globally if you plan to run the server frequently outside of MCP client configurations:
 
 ```bash
 npm install -g markdown-mcp-resource
@@ -209,9 +213,14 @@ Assistant: [Retrieves and displays installation.md content]
    ```
 
 3. Run the MCP server directly:
+
    ```bash
    npx markdown-mcp-resource@latest https://your-site.com/docs/
    ```
+
+4. Use the MCP Inspector for interactive testing:
+
+   Visit [https://modelcontextprotocol.io/legacy/tools/inspector](https://modelcontextprotocol.io/legacy/tools/inspector) to test your MCP server interactively in a web interface.
 
 ## Development
 
