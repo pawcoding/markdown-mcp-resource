@@ -1,12 +1,13 @@
 import type { ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
 
 /**
- * Cache for markdown file contents
+ * In-memory cache for markdown file contents, keyed by file URL.
  */
 const cache = new Map<string, string>();
 
 /**
- * Fetches the contents of a markdown file.
+ * Fetches the contents of a remote markdown file by URL, with caching to avoid redundant network requests.
+ * Returns the file content as a string, or undefined if the fetch fails.
  */
 export async function readMarkdownFile(url: URL): Promise<string | undefined> {
   // Check if the file is cached
@@ -31,7 +32,8 @@ export async function readMarkdownFile(url: URL): Promise<string | undefined> {
 }
 
 /**
- * Fetches a markdown file as resource content.
+ * Fetches a markdown file and returns it in MCP resource content format.
+ * Returns an array with the file's URI and text, or an empty array if not found.
  */
 export async function readMarkdownFileAsResourceContent(
   resourceUri: URL,

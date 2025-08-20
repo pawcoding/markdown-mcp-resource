@@ -6,22 +6,24 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { argv } from "node:process";
 import z from "zod";
 import packageJson from "../package.json";
-import {
-  readMarkdownFile,
-  readMarkdownFileAsResourceContent
-} from "./read-markdown-file";
+import { readIndexFile } from "./read-index.file";
+import { readMarkdownFileAsResourceContent } from "./read-markdown-file";
 
 /**
  * Extract the base path from the command line arguments.
  */
 const basePath = argv[2];
-if (!basePath?.startsWith("http")) {
-  console.error("Invalid base path. Please provide a valid URL.");
+if (!basePath?.startsWith("http") || !basePath?.endsWith(".json")) {
+  console.error(
+    "Invalid index path. Please provide a valid URL to your json index file."
+  );
   console.error("Usage: npx markdown-mcp-resource <basePath>");
   process.exit(1);
 }
 const hostname = new URL(basePath).hostname;
 console.error(`Starting MCP server for ${hostname}`);
+
+const index = await readIndexFile(new URL(basePath));
 
 const server = new McpServer({
   name: packageJson.name,
@@ -31,50 +33,43 @@ const server = new McpServer({
 server.registerResource(
   "markdown",
   new ResourceTemplate(`markdown://${hostname}/{file}`, {
-    list: async () => {
-      const indexFileUrl = new URL("index.md", basePath);
-      const indexFileContent = await readMarkdownFile(indexFileUrl);
-      if (!indexFileContent) {
-        return { resources: [] };
-      }
-
-      const resources = indexFileContent
-        .split("\n")
-        .filter(Boolean)
-        .map((line) => ({
-          name: line,
-          uri: `markdown://${hostname}/${line}`
-        }));
-      return {
-        resources
-      };
-    },
+    list: async () => ({
+      resources: index.files.map((file) => ({
+        name: file.name,
+        uri: `markdown://${hostname}/${file.name}`
+      }))
+    }),
     complete: {
       file: async (value, _) => {
         const searchTerm = value.trim().toLowerCase();
-
-        const indexFileUrl = new URL("index.md", basePath);
-        const indexFileContent = await readMarkdownFile(indexFileUrl);
-        if (!indexFileContent) {
-          return [];
-        }
-
-        const matchingLines = indexFileContent
-          .split("\n")
-          .filter(Boolean)
+        return index.files
+          .map((file) => file.name)
           .filter((line) => line.toLowerCase().includes(searchTerm));
-
-        return matchingLines;
       }
     }
   }),
   {
-    title: `Markdown files of ${hostname}`,
-    description: `Fetches markdown files from ${hostname} and makes them available as resources.`,
+    title: index.title ?? `Get markdown content of ${hostname}`,
+    description:
+      index.description ??
+      `Fetches markdown files from ${hostname} and makes them available as resources.`,
     mimeType: "text/markdown"
   },
   async (uri, { file }) => {
-    const fileUrl = new URL(`${file}.md`, basePath);
+    const fileEntry = index.files.find((f) => f.name === file);
+    if (!fileEntry) {
+      console.error(`File not found: ${file}`);
+      return {
+        contents: [
+          {
+            uri: uri.href,
+            text: `File ${file} not found`
+          }
+        ]
+      };
+    }
+
+    const fileUrl = new URL(fileEntry.route, basePath);
     const content = await readMarkdownFileAsResourceContent(uri, fileUrl);
     return {
       contents: content
@@ -85,8 +80,11 @@ server.registerResource(
 server.registerTool(
   "get_markdown_content",
   {
-    title: `Get markdown content of ${hostname}`,
-    description: `Fetches the markdown content from ${hostname} and makes it available via this tool. Use the \`file\` parameter to specify the markdown file to fetch. If not specified, the index file will be fetched. Please use the markdown resources instead if possible.`,
+    title: index.title ?? `Get markdown content of ${hostname}`,
+    description:
+      (index.description ??
+        `Fetches the markdown content from ${hostname} and makes it available via this tool.`) +
+      " Use the `file` parameter to specify the markdown file to fetch. If not specified, the index file will be fetched. Please use the markdown resources instead if possible.",
     annotations: {
       readOnlyHint: true
     },
@@ -101,7 +99,34 @@ server.registerTool(
     }
   },
   async ({ file }) => {
-    const fileUrl = new URL(`${file || "index"}.md`, basePath);
+    if (!file) {
+      return {
+        content: [
+          {
+            type: "text",
+            text:
+              index.files.map((file) => file.name).join("\n") ??
+              "No files found"
+          }
+        ]
+      };
+    }
+
+    const fileEntry = index.files.find((f) => f.name === file);
+    if (!fileEntry) {
+      console.error(`File not found: ${file}`);
+      return {
+        isError: true,
+        content: [
+          {
+            type: "text",
+            text: `File ${file} not found`
+          }
+        ]
+      };
+    }
+
+    const fileUrl = new URL(fileEntry.route, basePath);
     const content = await readMarkdownFileAsResourceContent(fileUrl, fileUrl);
     if (!content || content.length === 0) {
       return {
