@@ -24,7 +24,9 @@ export type Index = z.infer<typeof indexSchema>;
 export async function readIndexFile(url: URL): Promise<Index> {
   const file = await fetch(url);
   if (!file.ok) {
-    console.error("Failed to fetch index file");
+    console.error(
+      `Failed to fetch index file from ${url.toString()}: HTTP ${file.status} ${file.statusText}`
+    );
     process.exit(1);
   }
 
@@ -32,7 +34,7 @@ export async function readIndexFile(url: URL): Promise<Index> {
   try {
     body = await file.json();
   } catch (error) {
-    console.error("Failed to parse index file");
+    console.error("Failed to parse index file:", error);
     process.exit(1);
   }
 
