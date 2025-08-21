@@ -56,14 +56,19 @@ server.registerResource(
     mimeType: "text/markdown"
   },
   async (uri, { file }) => {
-    const fileEntry = index.files.find((f) => f.name === file);
+    // Strip .md extension if present since it will be added internally
+    const fileParam = Array.isArray(file) ? file[0] : file;
+    const normalizedFile = fileParam?.endsWith(".md")
+      ? fileParam.slice(0, -3)
+      : fileParam;
+    const fileEntry = index.files.find((f) => f.name === normalizedFile);
     if (!fileEntry) {
-      console.error(`File not found: ${file}`);
+      console.error(`File not found: ${normalizedFile}`);
       return {
         contents: [
           {
             uri: uri.href,
-            text: `File ${file} not found`
+            text: `File ${normalizedFile} not found`
           }
         ]
       };
@@ -112,15 +117,17 @@ server.registerTool(
       };
     }
 
-    const fileEntry = index.files.find((f) => f.name === file);
+    // Strip .md extension if present since it will be added internally
+    const normalizedFile = file.endsWith(".md") ? file.slice(0, -3) : file;
+    const fileEntry = index.files.find((f) => f.name === normalizedFile);
     if (!fileEntry) {
-      console.error(`File not found: ${file}`);
+      console.error(`File not found: ${normalizedFile}`);
       return {
         isError: true,
         content: [
           {
             type: "text",
-            text: `File ${file} not found`
+            text: `File ${normalizedFile} not found`
           }
         ]
       };
