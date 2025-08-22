@@ -22,10 +22,14 @@ Your documentation site must be structured as follows:
 
 ### Required: index.json File
 
+**Schema Reference:**
+The expected format for `index.json` is formally described in the [schema.json](https://github.com/pawcoding/markdown-mcp-resource/blob/master/schema.json) file in this repository.
+
 The base URL must point to an `index.json` file that lists all available markdown files and their full HTTP(S) routes, for example:
 
 ```json
 {
+  "$schema": "https://raw.githubusercontent.com/pawcoding/markdown-mcp-resource/refs/heads/master/schema.json",
   "title": "My Documentation",
   "description": "Example documentation index",
   "files": [
@@ -132,6 +136,7 @@ Create an `index.json` file on your web server:
 
 ```json
 {
+  "$schema": "https://raw.githubusercontent.com/pawcoding/markdown-mcp-resource/refs/heads/master/schema.json",
   "files": [
     {
       "name": "introduction",

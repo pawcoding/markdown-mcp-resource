@@ -22,11 +22,13 @@
     "dist/index.js"
   ],
   "scripts": {
-    "build": "node build.js",
+    "build": "node build/bundle.js",
+    "postbuild": "npm run generate:schema",
     "clean": "rm -rf dist",
     "dev": "esbuild src/index.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --watch --external:@modelcontextprotocol/sdk",
     "format": "prettier --write --cache .",
     "format:check": "prettier --check --cache .",
+    "generate:schema": "tsx build/export-schema.ts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "prestart": "npm run build",
@@ -46,6 +48,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.2.0",
     "prettier-plugin-packagejson": "^2.5.19",
+    "tsx": "^4.20.4",
     "typescript": "^5.9.2"
   },
   "packageManager": "npm@11.5.2",
