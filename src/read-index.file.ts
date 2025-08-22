@@ -8,7 +8,7 @@ export const indexSchema = z.object({
   description: z.optional(z.string()).meta({
     title: "Description of the mcp resource template",
     description:
-      "Used to describe the mcp resource template. Should include a description when then agent should use this resource."
+      "Used to describe the mcp resource template. Should include a description for when the agent should use this resource."
   }),
   files: z
     .array(
