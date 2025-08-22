@@ -23,11 +23,12 @@
   ],
   "scripts": {
     "build": "node build/bundle.js",
-    "postbuild": "tsx build/export-schema.ts",
+    "postbuild": "npm run generate:schema",
     "clean": "rm -rf dist",
     "dev": "esbuild src/index.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --watch --external:@modelcontextprotocol/sdk",
     "format": "prettier --write --cache .",
     "format:check": "prettier --check --cache .",
+    "generate:schema": "tsx build/export-schema.ts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "prestart": "npm run build",
