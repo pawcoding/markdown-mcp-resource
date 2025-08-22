@@ -1,6 +1,6 @@
 {
   "name": "markdown-mcp-resource",
-  "version": "1.0.0-next.1",
+  "version": "1.0.0-next.2",
   "description": "MCP server that makes remote markdown files available as mcp resources",
   "keywords": [
     "mcp-server",
