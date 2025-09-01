@@ -1,6 +1,7 @@
 # build output
 dist/
 CHANGELOG.md
+schema.json
 
 # dependencies
 node_modules/
