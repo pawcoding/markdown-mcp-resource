@@ -35,23 +35,23 @@
     "start": "node dist/index.js $MARKDOWN_MCP_RESOURCE"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.3",
+    "@modelcontextprotocol/sdk": "^1.20.1",
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@types/node": "^22.14.1",
-    "esbuild": "^0.25.9",
+    "esbuild": "^0.25.11",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
+    "lint-staged": "^16.2.4",
     "prettier": "^3.6.2",
-    "prettier-plugin-organize-imports": "^4.2.0",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-packagejson": "^2.5.19",
-    "tsx": "^4.20.4",
-    "typescript": "^5.9.2"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "npm@11.5.2",
+  "packageManager": "npm@11.6.2",
   "publishConfig": {
     "access": "public",
     "provenance": true
