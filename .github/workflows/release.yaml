@@ -21,16 +21,15 @@ jobs:
     steps:
       # Checkout repository
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
       # Setup Node
       - name: 📦 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          cache: "npm"
 
       # Enable corepack
       - name: ⚙️ Enable corepack
@@ -49,6 +48,7 @@ jobs:
         if: github.repository == 'pawcoding/markdown-mcp-resource'
         id: release
         uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 25
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
