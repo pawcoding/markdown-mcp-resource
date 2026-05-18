@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.1...v1.0.2) (2026-05-18)
+
+
+### Bug Fixes
+
+* **resource:** use text/plain as mimetype for resources ([763c093](https://github.com/pawcoding/markdown-mcp-resource/commit/763c093411d1e7651a6ffa191c7d4acf68b9a3b2))
+
 ## [1.0.1](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.0...v1.0.1) (2025-10-20)
 
 # 1.0.0 (2025-09-01)
