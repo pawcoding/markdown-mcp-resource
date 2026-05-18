@@ -1,5 +1,3 @@
-import type { ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
-
 /**
  * In-memory cache for markdown file contents, keyed by file URL.
  */
@@ -38,7 +36,7 @@ export async function readMarkdownFile(url: URL): Promise<string | undefined> {
 export async function readMarkdownFileAsResourceContent(
   resourceUri: URL,
   markdownUrl: URL
-): Promise<ReadResourceResult["contents"]> {
+): Promise<Array<{ uri: string; text: string }>> {
   const content = await readMarkdownFile(markdownUrl);
   if (!content) {
     return [];

@@ -150,7 +150,7 @@ server.registerTool(
     return {
       content: content.map((item) => ({
         type: "text",
-        text: item.text as string
+        text: item.text
       }))
     };
   }
