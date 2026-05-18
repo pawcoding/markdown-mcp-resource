@@ -53,7 +53,7 @@ server.registerResource(
     description:
       index.description ??
       `Fetches markdown files from ${hostname} and makes them available as resources.`,
-    mimeType: "text/markdown"
+    mimeType: "text/plain"
   },
   async (uri, { file }) => {
     // Strip .md extension if present since it will be added internally
