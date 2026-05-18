@@ -3,30 +3,34 @@
   "version": "1.0.1",
   "description": "MCP server that makes remote markdown files available as mcp resources",
   "keywords": [
-    "mcp-server",
-    "markdown"
+    "markdown",
+    "mcp-server"
   ],
   "homepage": "https://github.com/pawcoding/markdown-mcp-resource",
   "bugs": {
     "url": "https://github.com/pawcoding/markdown-mcp-resource/issues"
   },
+  "license": "MIT",
+  "author": "Luis Wolf <development@pawcode.de> (https://pawcode.de)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pawcoding/markdown-mcp-resource.git"
   },
-  "license": "MIT",
-  "author": "Luis Wolf <development@pawcode.de> (https://pawcode.de)",
-  "type": "module",
   "bin": "dist/index.mjs",
   "files": [
     "dist/index.mjs"
   ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "build": "tsdown",
     "postbuild": "npm run generate:schema",
     "dev": "tsdown --watch",
-    "format": "prettier --write --cache .",
-    "format:check": "prettier --check --cache .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "generate:schema": "tsx build/export-schema.ts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
@@ -43,16 +47,10 @@
     "@types/node": "^24.8.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
-    "prettier": "^3.8.3",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-packagejson": "^3.0.2",
+    "oxfmt": "^0.50.0",
     "tsdown": "^0.22.0",
     "tsx": "^4.22.1",
     "typescript": "^6.0.3"
   },
-  "packageManager": "npm@11.14.1",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  }
+  "packageManager": "npm@11.14.1"
 }
