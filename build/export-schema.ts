@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { z } from "zod/v4";
+import * as z from "zod";
 import { indexSchema } from "../src/read-index.file";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));

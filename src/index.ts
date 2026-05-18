@@ -1,10 +1,10 @@
+import { argv } from "node:process";
 import {
   McpServer,
   ResourceTemplate
 } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { argv } from "node:process";
-import z from "zod";
+import * as z from "zod";
 import packageJson from "../package.json";
 import { readIndexFile } from "./read-index.file";
 import { readMarkdownFileAsResourceContent } from "./read-markdown-file";
@@ -53,7 +53,7 @@ server.registerResource(
     description:
       index.description ??
       `Fetches markdown files from ${hostname} and makes them available as resources.`,
-    mimeType: "text/markdown"
+    mimeType: "text/plain"
   },
   async (uri, { file }) => {
     // Strip .md extension if present since it will be added internally
@@ -150,7 +150,7 @@ server.registerTool(
     return {
       content: content.map((item) => ({
         type: "text",
-        text: item.text as string
+        text: item.text
       }))
     };
   }
