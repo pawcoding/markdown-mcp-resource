@@ -4,7 +4,7 @@ import {
 } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { argv } from "node:process";
-import z from "zod";
+import * as z from "zod";
 import packageJson from "../package.json";
 import { readIndexFile } from "./read-index.file";
 import { readMarkdownFileAsResourceContent } from "./read-markdown-file";

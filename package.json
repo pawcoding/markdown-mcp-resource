@@ -36,20 +36,20 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
     "@types/node": "^24.8.1",
     "esbuild": "^0.25.11",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.4",
-    "prettier": "^3.6.2",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.8.3",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-packagejson": "^2.5.19",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
+    "prettier-plugin-packagejson": "^3.0.2",
+    "tsx": "^4.22.1",
+    "typescript": "^6.0.3"
   },
   "packageManager": "npm@11.14.1",
   "publishConfig": {
