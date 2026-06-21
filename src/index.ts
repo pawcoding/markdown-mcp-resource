@@ -95,7 +95,10 @@ server.registerTool(
         `Fetches the markdown content from ${hostname} and makes it available via this tool.`) +
       " Use the `file` parameter to specify the markdown file to fetch. If not specified, the index file will be fetched. Please use the markdown resources instead if possible.",
     annotations: {
-      readOnlyHint: true
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true
     },
     inputSchema: {
       file: z.optional(
