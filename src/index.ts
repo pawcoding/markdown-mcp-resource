@@ -20,10 +20,14 @@ if (!basePath?.startsWith("http") || !basePath?.endsWith(".json")) {
   console.error("Usage: npx markdown-mcp-resource <basePath>");
   process.exit(1);
 }
-const hostname = new URL(basePath).hostname;
+const indexUrl = new URL(basePath);
+const hostname = indexUrl.hostname;
 console.error(`Starting MCP server for ${hostname}`);
 
-const index = await readIndexFile(new URL(basePath));
+const index = await readIndexFile(indexUrl);
+
+const resolveFileRoute = (route: string): URL =>
+  route.startsWith("/") ? new URL(route, indexUrl.origin) : new URL(route);
 
 const server = new McpServer({
   name: packageJson.name,
@@ -74,7 +78,7 @@ server.registerResource(
       };
     }
 
-    const fileUrl = new URL(fileEntry.route, basePath);
+    const fileUrl = resolveFileRoute(fileEntry.route);
     const content = await readMarkdownFileAsResourceContent(uri, fileUrl);
     return {
       contents: content
@@ -133,7 +137,7 @@ server.registerTool(
       };
     }
 
-    const fileUrl = new URL(fileEntry.route, basePath);
+    const fileUrl = resolveFileRoute(fileEntry.route);
     const content = await readMarkdownFileAsResourceContent(fileUrl, fileUrl);
     if (!content || content.length === 0) {
       return {
