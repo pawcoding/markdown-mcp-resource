@@ -25,7 +25,7 @@ Your documentation site must be structured as follows:
 **Schema Reference:**
 The expected format for `index.json` is formally described in the [schema.json](https://github.com/pawcoding/markdown-mcp-resource/blob/master/schema.json) file in this repository.
 
-The base URL must point to an `index.json` file that lists all available markdown files and their full HTTP(S) routes, for example:
+The base URL must point to an `index.json` file that lists all available markdown files and their routes. Routes can be full HTTP(S) URLs or root-relative paths that start with `/`, for example:
 
 ```json
 {
@@ -43,15 +43,15 @@ The base URL must point to an `index.json` file that lists all available markdow
     },
     {
       "name": "tutorials/basic-setup",
-      "route": "https://your-site.com/docs/tutorials/basic-setup.md"
+      "route": "/docs/tutorials/basic-setup.md"
     },
     {
       "name": "tutorials/advanced-config",
-      "route": "https://your-site.com/docs/tutorials/advanced-config.md"
+      "route": "/docs/tutorials/advanced-config.md"
     },
     {
       "name": "troubleshooting",
-      "route": "https://your-site.com/docs/troubleshooting.md"
+      "route": "/docs/troubleshooting.md"
     }
   ]
 }
@@ -59,11 +59,11 @@ The base URL must point to an `index.json` file that lists all available markdow
 
 ### Markdown Files
 
-Each file listed in the index must be available at the full HTTP(S) URL specified in the `route` field:
+Each file listed in the index must be available at the URL specified in the `route` field. Root-relative routes resolve against the origin of the index file URL, not the path of the index file:
 
 ```
 https://your-site.com/docs/
-├── index.json            # Lists all available files and their full HTTP(S) routes
+├── index.json            # Lists all available files and their routes
 ├── getting-started.md    # Individual markdown files
 ├── api-reference.md
 ├── tutorials/
@@ -74,7 +74,8 @@ https://your-site.com/docs/
 
 **Important Notes:**
 
-- File names in the `name` field of the index should NOT include the `.md` extension; the `route` field must be a full HTTP(S) URL to the markdown file and include the `.md` extension
+- File names in the `name` field of the index should NOT include the `.md` extension; the `route` field must be a full HTTP(S) URL or root-relative path to the markdown file and include the `.md` extension
+- Root-relative routes must start with `/`; path-relative routes such as `docs/getting-started.md` or `./docs/getting-started.md` are not supported
 - Subdirectories are supported (e.g., `tutorials/basic-setup`)
 
 ## MCP Client Configuration
@@ -148,20 +149,20 @@ Create an `index.json` file on your web server:
     },
     {
       "name": "configuration",
-      "route": "https://yoursite.com/docs/configuration.md"
+      "route": "/docs/configuration.md"
     },
     {
       "name": "api/authentication",
-      "route": "https://yoursite.com/docs/api/authentication.md"
+      "route": "/docs/api/authentication.md"
     },
     {
       "name": "api/endpoints",
-      "route": "https://yoursite.com/docs/api/endpoints.md"
+      "route": "/docs/api/endpoints.md"
     },
-    { "name": "examples", "route": "https://yoursite.com/docs/examples.md" },
+    { "name": "examples", "route": "/docs/examples.md" },
     {
       "name": "troubleshooting",
-      "route": "https://yoursite.com/docs/troubleshooting.md"
+      "route": "/docs/troubleshooting.md"
     }
   ]
 }
@@ -259,7 +260,7 @@ git clone https://github.com/pawcoding/markdown-mcp-resource.git
 cd markdown-mcp-resource
 npm install
 npm run build
-npm start https://your-test-site.com/docs/
+npm start https://your-test-site.com/docs/index.json
 ```
 
 Visit [https://modelcontextprotocol.io/legacy/tools/inspector](https://modelcontextprotocol.io/legacy/tools/inspector) to test your MCP server interactively in a web interface.

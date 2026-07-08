@@ -18,11 +18,25 @@ export const indexSchema = z.object({
           description:
             "Name of the markdown file used to access the resource. Will be used to request the resource by name."
         }),
-        route: z.url().meta({
-          title: "Route to access the markdown file",
-          description:
-            "Full URL to access the markdown file. This should be a publicly accessible URL."
-        })
+        route: z
+          .union([
+            z
+              .string()
+              .regex(/^https?:\/\//, {
+                message: "Route must be an absolute HTTP(S) URL."
+              })
+              .refine((route) => URL.canParse(route), {
+                message: "Route must be a valid URL."
+              }),
+            z.string().regex(/^\/(?!\/)/, {
+              message: "Route must be a root-relative path starting with /."
+            })
+          ])
+          .meta({
+            title: "Route to access the markdown file",
+            description:
+              "HTTP(S) URL or root-relative path starting with / to access the markdown file."
+          })
       })
     )
     .meta({
