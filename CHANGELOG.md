@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.2...v1.1.0) (2026-07-08)
+
+
+### Features
+
+* **schema:** allow origin relative urls ([90ba9a4](https://github.com/pawcoding/markdown-mcp-resource/commit/90ba9a4b25cfb676997fcd38038f5ca023029c18))
+
 ## [1.0.2](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.1...v1.0.2) (2026-05-18)
 
 
