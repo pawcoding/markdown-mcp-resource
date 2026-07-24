@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.1.1...v1.1.2) (2026-07-24)
+
+
+### Bug Fixes
+
+* add request timeout of 10 seconds ([ea66acc](https://github.com/pawcoding/markdown-mcp-resource/commit/ea66acc486e7b0e90f900cf9157aa55e706d80af))
+* **content:** add TTL to in-memory cache to reload outdated content ([421a4f5](https://github.com/pawcoding/markdown-mcp-resource/commit/421a4f5ebd002fcbabdc1a2a982899128a63a06a))
+
 ## [1.1.1](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.1.0...v1.1.1) (2026-07-24)
 
 # [1.1.0](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.2...v1.1.0) (2026-07-08)
