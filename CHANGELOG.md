@@ -1,3 +1,5 @@
+## [1.1.1](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.1.0...v1.1.1) (2026-07-24)
+
 # [1.1.0](https://github.com/pawcoding/markdown-mcp-resource/compare/v1.0.2...v1.1.0) (2026-07-08)
 
 
