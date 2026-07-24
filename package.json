@@ -16,7 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/pawcoding/markdown-mcp-resource.git"
   },
-  "bin": "dist/index.mjs",
+  "bin": {
+    "markdown-mcp-resource": "dist/index.mjs"
+  },
   "files": [
     "dist/index.mjs"
   ],
