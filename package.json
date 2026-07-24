@@ -38,19 +38,22 @@
     "start": "node dist/index.mjs $MARKDOWN_MCP_RESOURCE"
   },
   "dependencies": {
-    "zod": "^4.4.3"
+    "zod": "4.4.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "@types/node": "^24.8.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
-    "oxfmt": "^0.58.0",
-    "tsdown": "^0.22.4",
-    "tsx": "^4.23.0",
-    "typescript": "^6.0.3"
+    "@commitlint/cli": "21.2.1",
+    "@commitlint/config-conventional": "21.2.0",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@types/node": "24.13.3",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.8",
+    "oxfmt": "0.59.0",
+    "tsdown": "0.22.9",
+    "tsx": "4.23.1",
+    "typescript": "6.0.3"
   },
-  "packageManager": "npm@11.18.0"
+  "packageManager": "npm@12.0.1",
+  "allowScripts": {
+    "esbuild@0.28.0": true
+  }
 }

@@ -27,7 +27,7 @@ jobs:
 
       # Setup Node
       - name: 📦 Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
 
@@ -47,7 +47,7 @@ jobs:
       - name: 🚀 Create release
         if: github.repository == 'pawcoding/markdown-mcp-resource'
         id: release
-        uses: cycjimmy/semantic-release-action@v4
+        uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
         with:
           semantic_version: 25
         env:
