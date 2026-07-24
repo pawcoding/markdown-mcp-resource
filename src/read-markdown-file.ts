@@ -14,7 +14,9 @@ export async function readMarkdownFile(url: URL): Promise<string | undefined> {
   }
 
   // Fetch the file contents
-  const file = await fetch(url);
+  const file = await fetch(url, {
+    signal: AbortSignal.timeout(10_000) // 10 seconds timeout
+  });
   if (!file.ok) {
     cache.set(url.href, "");
     console.error(

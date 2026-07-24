@@ -52,7 +52,9 @@ export type Index = z.infer<typeof indexSchema>;
  * Exits the process if the file cannot be fetched or parsed.
  */
 export async function readIndexFile(url: URL): Promise<Index> {
-  const file = await fetch(url);
+  const file = await fetch(url, {
+    signal: AbortSignal.timeout(10_000) // 10 seconds timeout
+  });
   if (!file.ok) {
     console.error(
       `Failed to fetch index file from ${url.toString()}: HTTP ${file.status} ${file.statusText}`
