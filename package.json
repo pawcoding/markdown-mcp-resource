@@ -49,7 +49,7 @@
     "lint-staged": "17.0.8",
     "oxfmt": "0.59.0",
     "tsdown": "0.22.9",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "packageManager": "npm@12.0.1"
 }
