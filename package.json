@@ -28,6 +28,7 @@
     "provenance": true
   },
   "scripts": {
+    "prebuild": "npm run typecheck",
     "build": "tsdown",
     "postbuild": "npm run generate:schema",
     "dev": "tsdown --watch",
@@ -37,7 +38,8 @@
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "prestart": "npm run build",
-    "start": "node dist/index.mjs $MARKDOWN_MCP_RESOURCE"
+    "start": "node dist/index.mjs $MARKDOWN_MCP_RESOURCE",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "zod": "4.4.3"
