@@ -5,10 +5,9 @@ staged_files=$(git diff --cached --name-only)
 if [ -n "$staged_files" ]; then
   # Check if any TypeScript files are staged
   if echo "$staged_files" | grep -q "\.ts$"; then
-    echo "🛠️ Building..."
-    npm run build
+    npm run typecheck
   fi
 
   # Run lint-staged for other checks
-  npx lint-staged
+  npx --no -- lint-staged
 fi
