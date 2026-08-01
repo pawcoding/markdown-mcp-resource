@@ -1,9 +1,6 @@
 import { argv } from "node:process";
-import {
-  McpServer,
-  ResourceTemplate
-} from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer, ResourceTemplate } from "@modelcontextprotocol/server";
+import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
 import * as z from "zod";
 import packageJson from "../package.json";
 import { readIndexFile } from "./read-index.file";
