@@ -1,9 +1,6 @@
 import { argv } from "node:process";
-import {
-  McpServer,
-  ResourceTemplate
-} from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer, ResourceTemplate } from "@modelcontextprotocol/server";
+import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
 import * as z from "zod";
 import packageJson from "../package.json";
 import { readIndexFile } from "./read-index.file";
@@ -95,7 +92,10 @@ server.registerTool(
         `Fetches the markdown content from ${hostname} and makes it available via this tool.`) +
       " Use the `file` parameter to specify the markdown file to fetch. If not specified, the index file will be fetched. Please use the markdown resources instead if possible.",
     annotations: {
-      readOnlyHint: true
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true
     },
     inputSchema: {
       file: z.optional(
