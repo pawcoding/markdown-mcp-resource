@@ -101,7 +101,7 @@ function buildServer(): McpServer {
         idempotentHint: true,
         openWorldHint: true
       },
-      inputSchema: {
+      inputSchema: z.object({
         file: z.optional(
           z
             .string()
@@ -109,7 +109,7 @@ function buildServer(): McpServer {
               "The markdown file to fetch. If empty, fetches the index file."
             )
         )
-      }
+      })
     },
     async ({ file }) => {
       if (!file) {
