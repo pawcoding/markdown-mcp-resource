@@ -39,8 +39,7 @@
     "prepublishOnly": "npm run build",
     "prestart": "npm run build",
     "start": "node dist/index.mjs $MARKDOWN_MCP_RESOURCE",
-    "typecheck": "tsc --noEmit",
-    "update-dependencies": "ncu -i -u --format group && ncu -i -u --target minor && npm update && actions-up --min-age 7"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.0.0",
@@ -50,10 +49,8 @@
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",
     "@types/node": "24.13.4",
-    "actions-up": "1.20.0",
     "husky": "9.1.7",
     "lint-staged": "17.5.1",
-    "npm-check-updates": "23.1.0",
     "oxfmt": "0.67.0",
     "tsdown": "0.23.0",
     "typescript": "7.0.2"
