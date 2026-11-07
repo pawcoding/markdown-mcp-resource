@@ -34,7 +34,7 @@
     "dev": "tsdown --watch",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "generate:schema": "tsdown build/export-schema.ts -d ./build --no-config --no-clean --no-report --log-level error --on-success \"node build/export-schema.mjs\"",
+    "generate:schema": "oxnode build/export-schema.ts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "prestart": "npm run build",
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
+    "@oxc-node/cli": "1.0.1",
     "@types/node": "24.19.2",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
